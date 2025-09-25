@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}Booking Confirmed{% endblock %}
+
+{% block content %}
+<section class="py-5 bg-success bg-opacity-25">
+  <div class="container text-center" style="max-width: 600px;">
+    <h2 class="h4 fw-bold mb-3 text-success">Booking Confirmed!</h2>
+    <p class="mb-2">Thank you, {{ guest_name }}.</p>
+    <p class="mb-2">Hotel: <strong>{{ hotel.name }}</strong></p>
+    <p class="mb-2">Check-in: {{ checkin }}</p>
+    <p class="mb-2">Check-out: {{ checkout }}</p>
+    <p class="mb-4 fw-semibold">Total Price: ₹ {{ total_price }}</p>
+    <a href="{{ url_for('home') }}" class="btn btn-danger">Back to Home</a>
+  </div>
+</section>
+{% endblock %}

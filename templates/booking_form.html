@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}Book {{ hotel.name }}{% endblock %}
+
+{% block content %}
+<section class="py-5 bg-light">
+  <div class="container" style="max-width: 600px;">
+    <h2 class="h4 fw-bold mb-4">Book {{ hotel.name }}</h2>
+    <form method="POST" class="bg-white p-4 rounded-4 shadow-sm">
+
+      <div class="mb-3">
+        <label for="guest_name" class="form-label fw-semibold">Your Name</label>
+        <input type="text" name="guest_name" id="guest_name" class="form-control" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="checkin" class="form-label fw-semibold">Check-in Date</label>
+        <input type="date" name="checkin" id="checkin" class="form-control" required>
+      </div>
+
+      <div class="mb-4">
+        <label for="checkout" class="form-label fw-semibold">Check-out Date</label>
+        <input type="date" name="checkout" id="checkout" class="form-control" required>
+      </div>
+
+      <button type="submit" class="btn btn-danger w-100">Book Now</button>
+    </form>
+  </div>
+</section>
+{% endblock %}

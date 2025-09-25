@@ -1,0 +1,142 @@
+{% extends "base.html" %}
+{% block title %}About Us - Perfect Stay{% endblock %}
+
+{% block content %}
+<section class="py-5" style="background: #f8f9fa;">
+  <div class="container">
+
+    <!-- Heading -->
+    <div class="text-center mx-auto mb-5" style="max-width: 750px;">
+      <h1 class="display-5 fw-bold text-dark mb-3">
+        About <span class="text-danger">Perfect Stay</span>
+      </h1>
+      <p class="text-muted fs-5">
+        At Perfect Stay, we believe your travels should be stress-free, comfortable, and memorable.
+        Whether you're looking for luxury, budget, or a hidden gem, we're here to connect you with the best accommodations.
+      </p>
+      <div class="d-flex justify-content-center gap-3 flex-wrap mt-3">
+        <span class="badge bg-danger-subtle text-danger px-3 py-2 rounded-pill">10,000+ Travelers</span>
+        <span class="badge bg-danger-subtle text-danger px-3 py-2 rounded-pill">5⭐ Rated Service</span>
+      </div>
+    </div>
+
+    <!-- Mission -->
+    <div class="row align-items-center mb-5 g-4">
+      <div class="col-md-6">
+        <img src="https://images.unsplash.com/photo-1505691938895-1758d7feb511?auto=format&fit=crop&w=1000&q=80"
+             alt="Mission" class="img-fluid rounded-4 shadow-sm" style="height: 380px; object-fit: cover;">
+      </div>
+      <div class="col-md-6">
+        <h2 class="h4 fw-bold text-dark mb-3">🌍 Our Mission</h2>
+        <p class="text-muted">
+          We strive to make finding and booking hotels simple, transparent, and personalized.
+          Our goal is to help you discover stays that fit your style, budget, and expectations — anywhere in the world.
+        </p>
+        <div class="row text-center g-3 mt-4">
+          <div class="col-6">
+            <div class="p-3 bg-white rounded-3 shadow-sm">
+              <div class="fw-bold text-danger fs-4">500+</div>
+              <small class="text-muted">Partner Hotels</small>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="p-3 bg-white rounded-3 shadow-sm">
+              <div class="fw-bold text-danger fs-4">50+</div>
+              <small class="text-muted">Cities Covered</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Why Choose Us -->
+    <div class="bg-white rounded-4 shadow-sm p-5 mb-5">
+      <div class="text-center mb-5">
+        <h2 class="h4 fw-bold text-dark">Why Choose Perfect Stay?</h2>
+      </div>
+      <div class="row text-center g-4">
+        <div class="col-md-4">
+          <div class="p-4 h-100 rounded-3 border hover-lift">
+            <div class="text-danger mb-3 fs-2">🏨</div>
+            <h5 class="fw-bold">Curated Hotels</h5>
+            <p class="text-muted small">We hand-pick the best stays with genuine reviews and verified quality.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="p-4 h-100 rounded-3 border hover-lift">
+            <div class="text-danger mb-3 fs-2">💳</div>
+            <h5 class="fw-bold">Best Prices</h5>
+            <p class="text-muted small">Enjoy competitive rates with no hidden fees and transparent pricing.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="p-4 h-100 rounded-3 border hover-lift">
+            <div class="text-danger mb-3 fs-2">🤝</div>
+            <h5 class="fw-bold">Trusted Service</h5>
+            <p class="text-muted small">Thousands of happy travelers trust us every day with 24/7 support.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Team -->
+    <div class="mb-5">
+      <div class="text-center mb-5">
+        <h2 class="h4 fw-bold text-dark">Meet Our Team</h2>
+        <p class="text-muted small">Our passionate team works tirelessly to ensure your travel experience is perfect.</p>
+      </div>
+      <div class="row text-center g-4">
+        <!-- Team Member -->
+        <div class="col-md-4">
+          <div class="p-4 bg-white rounded-4 shadow-sm hover-lift">
+            <img src="{{ url_for('static', filename='image/ajay.jpg') }}" class="rounded-circle shadow-sm mb-3"
+                 style="width: 100px; height: 100px; object-fit: cover;" alt="Ajay">
+            <h6 class="fw-bold mb-0">Ajay Chavan</h6>
+            <small class="text-danger d-block mb-2">Founder & CEO</small>
+            <p class="text-muted small">Leading the vision to revolutionize travel booking experiences worldwide.</p>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="p-4 bg-white rounded-4 shadow-sm hover-lift">
+            <img src="{{ url_for('static', filename='image/viraj-Ceo.jpg') }}" class="rounded-circle shadow-sm mb-3"
+                 style="width: 100px; height: 100px; object-fit: cover;" alt="Viraj">
+            <h6 class="fw-bold mb-0">Viraj Patil</h6>
+            <small class="text-danger d-block mb-2">Head of Operations</small>
+            <p class="text-muted small">Ensuring seamless operations and exceptional service delivery across all platforms.</p>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="p-4 bg-white rounded-4 shadow-sm hover-lift">
+            <img src="{{ url_for('static', filename='image/Uday.jpg') }}" class="rounded-circle shadow-sm mb-3"
+                 style="width: 100px; height: 100px; object-fit: cover;" alt="Uday">
+            <h6 class="fw-bold mb-0">Uday Kale</h6>
+            <small class="text-danger d-block mb-2">Tech Lead</small>
+            <p class="text-muted small">Building cutting-edge technology solutions for the future of travel booking.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="text-center bg-white rounded-4 shadow-sm p-5">
+      <h2 class="h4 fw-bold text-dark mb-3">Ready to Book Your Perfect Stay?</h2>
+      <p class="text-muted small mb-4">Join thousands of satisfied travelers and discover your next amazing accommodation.</p>
+      <a href="{{ url_for('listing') }}" class="btn btn-danger px-4 rounded-pill me-2">Explore Listings</a>
+      <a href="#" class="btn btn-outline-danger px-4 rounded-pill">Contact Us</a>
+    </div>
+
+  </div>
+</section>
+
+<style>
+  .hover-lift {
+    transition: all 0.3s ease;
+  }
+  .hover-lift:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 24px rgba(0,0,0,0.1);
+  }
+</style>
+{% endblock %}

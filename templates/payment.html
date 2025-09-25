@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% block title %}Complete Payment - Perfect Stay{% endblock %}
+
+{% block content %}
+<div class="container py-5 d-flex justify-content-center align-items-center">
+  <div class="card shadow-lg p-4 rounded-4 animate-fade-in" style="max-width: 600px; width: 100%;">
+    
+    <!-- Animated credit card illustration -->
+    <div class="text-center mb-4 animate-bounce">
+      💳
+    </div>
+
+    <h2 class="h4 fw-bold mb-3 text-center">Complete Payment for <span class="text-danger">{{ hotel.name }}</span></h2>
+    <p class="mb-1 text-center"><strong>Guest:</strong> {{ guest_name }}</p>
+    <p class="mb-3 text-center fs-5 fw-semibold text-danger">💰 ₹{{ total_price }}</p>
+
+    <!-- Razorpay Form -->
+    <form id="razorpay-form" action="{{ url_for('payment_success') }}" method="POST" class="text-center">
+      <script
+        src="https://checkout.razorpay.com/v1/checkout.js"
+        data-key="{{ key_id }}"
+        data-amount="{{ total_price * 100 }}"
+        data-currency="INR"
+        data-order_id="{{ payment['id'] }}"
+        data-buttontext="💳 Pay Securely with Razorpay"
+        data-name="PerfectStay"
+        data-description="Hotel Booking"
+        data-prefill.name="{{ guest_name }}"
+        data-theme.color="#e63946">
+      </script>
+      <input type="hidden" name="hidden" value="Hidden Element">
+    </form>
+
+    <!-- Secure note -->
+    <div class="text-center mt-3 small text-muted animate-fade-in">
+      🔒 100% Secure Payment powered by Razorpay
+    </div>
+  </div>
+</div>
+
+<!-- Extra Styling & Animations -->
+<style>
+  /* Fade In Animation */
+  .animate-fade-in {
+    animation: fadeIn 1s ease-in-out;
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Bounce Animation for Emoji */
+  .animate-bounce {
+    animation: bounce 1.5s infinite;
+    font-size: 3rem;
+  }
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+
+  /* Razorpay Button Custom Styling */
+  .razorpay-payment-button {
+    background: linear-gradient(90deg, #e63946, #d62828);
+    border: none;
+    border-radius: 8px;
+    padding: 12px 20px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #fff;
+    cursor: pointer;
+    width: 100%;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .razorpay-payment-button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(230, 57, 70, 0.4);
+  }
+</style>
+{% endblock %}

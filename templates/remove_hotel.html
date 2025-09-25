@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Remove Hotel{% endblock %}
+
+{% block content %}
+<section class="py-12 bg-gray-50">
+  <div class="container mx-auto px-6 max-w-lg">
+    <h2 class="text-2xl font-bold mb-6">Remove Hotel</h2>
+    <form method="POST" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+      
+      <label class="block mb-2 font-semibold">Select Hotel to Remove</label>
+      <select name="hotel_id" class="w-full border rounded px-3 py-2 mb-4" required>
+        {% for hotel in hotels %}
+        <option value="{{ hotel.id }}">{{ hotel.name }} - {{ hotel.location }}</option>
+        {% endfor %}
+      </select>
+
+      <button type="submit" class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700">Remove Hotel</button>
+    </form>
+  </div>
+</section>
+{% endblock %}

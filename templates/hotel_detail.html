@@ -1,0 +1,146 @@
+{% extends "base.html" %}
+{% block title %}{{ hotel.name }} - Perfect Stay{% endblock %}
+
+{% block content %}
+<!-- Hero / Banner -->
+<section class="position-relative rounded-bottom-4 overflow-hidden shadow-sm">
+  <img src="{{ hotel.image_url }}" 
+       class="img-fluid w-100 zoom-on-hover" 
+       style="height: 400px; object-fit: cover;" 
+       alt="{{ hotel.name }}">
+  <div class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center bg-dark bg-opacity-50">
+    <h1 class="display-4 text-white fw-bold animate-fade">{{ hotel.name }}</h1>
+  </div>
+</section>
+
+<!-- Hotel Info -->
+<section class="py-5">
+  <div class="container">
+    <div class="row g-4">
+
+      <!-- Main Details -->
+      <div class="col-md-8">
+        <h2 class="h4 fw-bold">{{ hotel.name }}</h2>
+        <p class="text-muted"><i class="bi bi-geo-alt-fill text-danger"></i> {{ hotel.location }}</p>
+        <p class="text-danger fw-semibold fs-5">₹ {{ hotel.price }} / night</p>
+        <p class="text-warning">⭐ {{ hotel.rating }}</p>
+
+        <h3 class="h5 fw-semibold mt-4">About this stay</h3>
+        <p class="text-muted">{{ hotel.description }}</p>
+
+        <h3 class="h5 fw-semibold mt-4">Amenities</h3>
+        {% if amenities %}
+        <ul class="row list-unstyled">
+          {% for amenity in amenities %}
+          <li class="col-6 mb-2 animate-fade delay-{{ loop.index % 5 }}">
+            ✅ {{ amenity }}
+          </li>
+          {% endfor %}
+        </ul>
+        {% else %}
+        <p class="text-muted">No amenities listed for this hotel.</p>
+        {% endif %}
+      </div>
+
+      <!-- Booking Card -->
+      <div class="col-md-4">
+        <div class="bg-white rounded-4 shadow p-4 sticky-top animate-fade delay-2" style="top: 80px;">
+          {% if session.get('user') %}
+          <h3 class="h5 fw-bold mb-3">Book this stay</h3>
+          <form action="{{ url_for('book_hotel', hotel_id=hotel.id) }}" method="POST">
+            <div class="mb-3">
+              <label class="form-label">Your Name</label>
+              <input type="text" name="guest_name" class="form-control hover-focus" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Check-in</label>
+              <input type="date" name="checkin" class="form-control hover-focus" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Check-out</label>
+              <input type="date" name="checkout" class="form-control hover-focus" required>
+            </div>
+            <div class="mb-4">
+              <label class="form-label">Guests</label>
+              <input type="number" name="guests" min="1" value="1" class="form-control hover-focus">
+            </div>
+            <button type="submit" class="btn btn-danger w-100 fw-semibold shadow-sm hover-scale">
+              Book Now 🚀
+            </button>
+          </form>
+          {% else %}
+          <div class="text-center">
+            <h5 class="fw-semibold mb-3">Please log in to book</h5>
+            <a href="{{ url_for('login') }}" class="btn btn-danger w-100 fw-semibold shadow-sm hover-scale">
+              Login to Book
+            </a>
+          </div>
+          {% endif %}
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Google Map -->
+<section class="py-5 bg-light">
+  <div class="container">
+    <h3 class="h5 fw-bold mb-3">📍 Location</h3>
+    <div id="map" 
+         class="rounded-4 shadow-sm" 
+         style="width: 100%; height: 400px;"
+         data-latitude="{{ hotel.latitude|default(19.0760)|float }}"
+         data-longitude="{{ hotel.longitude|default(72.8777)|float }}"
+         data-hotel-name="{{ hotel.name|e }}">
+    </div>
+  </div>
+</section>
+
+<!-- Custom Interactivity -->
+<style>
+  .zoom-on-hover { transition: transform 0.4s ease; }
+  .zoom-on-hover:hover { transform: scale(1.05); }
+  .hover-focus:focus { border-color: #dc3545 !important; box-shadow: 0 0 8px rgba(220, 53, 69, 0.4); }
+  .hover-scale:hover { transform: scale(1.05); transition: all 0.3s ease-in-out; }
+  .animate-fade { opacity: 0; transform: translateY(20px); animation: fadeInUp 0.8s forwards; }
+  .delay-1 { animation-delay: 0.2s; }
+  .delay-2 { animation-delay: 0.4s; }
+  .delay-3 { animation-delay: 0.6s; }
+  .delay-4 { animation-delay: 0.8s; }
+  .delay-5 { animation-delay: 1s; }
+  @keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
+</style>
+
+<script>
+  function initMap() {
+    const mapElement = document.getElementById("map");
+    const hotelLocation = { 
+      lat: parseFloat(mapElement.dataset.latitude), 
+      lng: parseFloat(mapElement.dataset.longitude) 
+    };
+    const map = new google.maps.Map(mapElement, {
+      zoom: 15,
+      center: hotelLocation,
+      styles: [
+        { elementType: "geometry", stylers: [{ color: "#f5f5f5" }] },
+        { elementType: "labels.icon", stylers: [{ visibility: "off" }] },
+        { elementType: "labels.text.fill", stylers: [{ color: "#616161" }] },
+        { elementType: "labels.text.stroke", stylers: [{ color: "#f5f5f5" }] },
+        { featureType: "poi", elementType: "geometry", stylers: [{ color: "#eeeeee" }] },
+        { featureType: "water", elementType: "geometry.fill", stylers: [{ color: "#cce7ff" }] }
+      ]
+    });
+    new google.maps.Marker({
+      position: hotelLocation,
+      map: map,
+      title: mapElement.dataset.hotelName,
+      animation: google.maps.Animation.DROP
+    });
+  }
+</script>
+
+<script async defer
+src="https://maps.googleapis.com/maps/api/js?key={{ config.GOOGLE_MAPS_API_KEY }}&callback=initMap">
+</script>
+{% endblock %}

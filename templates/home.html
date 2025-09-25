@@ -1,0 +1,289 @@
+{% extends "base.html" %}
+{% block title %}Home - Perfect Stay{% endblock %}
+
+{% block content %}
+
+<!-- Hero Section -->
+<section class="hero-section text-white py-5 rounded-4 shadow-sm mx-3 my-4">
+  <div class="container text-center">
+    <h1 class="display-4 fw-bold mb-3 animate-fade">Find Your Perfect Stay</h1>
+    <p class="lead mb-4 animate-fade delay-1">Hotels • Homes • Resorts • Villas</p>
+
+    <!-- Search Form -->
+    <form action="/search" method="GET"
+          class="bg-white rounded-4 shadow-lg p-4 mx-auto animate-fade delay-2"
+          style="max-width: 900px;">
+      <div class="row g-3 align-items-center">
+        <div class="col-md-5">
+          <input type="text" name="location" placeholder="Enter city or hotel"
+                 class="form-control border-danger shadow-sm" required>
+        </div>
+        <div class="col-md-3">
+          <input type="date" name="checkin" class="form-control border-danger shadow-sm" required>
+        </div>
+        <div class="col-md-3">
+          <input type="date" name="checkout" class="form-control border-danger shadow-sm" required>
+        </div>
+        <div class="col-md-1 d-grid">
+          <button type="submit" class="btn btn-danger fw-semibold shadow-sm hover-scale">
+            Search 🔍
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</section>
+
+<!-- Features Section -->
+<section class="py-5 bg-light">
+  <div class="container">
+    <h2 class="h3 fw-bold mb-5 text-danger text-center">✨ Our Features</h2>
+    <div class="row text-center">
+      <div class="col-md-3 mb-4">
+        <div class="feature-card p-4 rounded-4 hover-lift transition shadow-sm">
+          <div class="feature-icon mb-3 text-danger">🏨</div>
+          <h5 class="fw-bold text-dark">Premium Hotels</h5>
+          <p class="small text-muted">Luxury accommodations worldwide</p>
+        </div>
+      </div>
+      <div class="col-md-3 mb-4">
+        <div class="feature-card p-4 rounded-4 hover-lift transition shadow-sm">
+          <div class="feature-icon mb-3 text-danger">💰</div>
+          <h5 class="fw-bold text-dark">Best Prices</h5>
+          <p class="small text-muted">Guaranteed lowest rates</p>
+        </div>
+      </div>
+      <div class="col-md-3 mb-4">
+        <div class="feature-card p-4 rounded-4 hover-lift transition shadow-sm">
+          <div class="feature-icon mb-3 text-danger">🔒</div>
+          <h5 class="fw-bold text-dark">Secure Booking</h5>
+          <p class="small text-muted">Safe and encrypted payments</p>
+        </div>
+      </div>
+      <div class="col-md-3 mb-4">
+        <div class="feature-card p-4 rounded-4 hover-lift transition shadow-sm">
+          <div class="feature-icon mb-3 text-danger">📞</div>
+          <h5 class="fw-bold text-dark">24/7 Support</h5>
+          <p class="small text-muted">Round-the-clock assistance</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Popular Destinations -->
+<section class="py-5 bg-light">
+  <div class="container">
+    <h2 class="h3 fw-bold mb-4 text-danger text-center">🌍 Popular Destinations</h2>
+    <div class="row g-4">
+      {% for city in popular_cities %}
+      <div class="col-6 col-sm-4 col-md-3">
+        <a href="/search?location={{ city.name }}" class="text-decoration-none">
+          <div class="card border-0 shadow-sm position-relative overflow-hidden hover-lift transition rounded-4">
+            <img src="{{ city.image_url }}" class="card-img-top rounded-top-4" style="height: 180px; object-fit: cover;">
+            <div class="position-absolute top-0 start-0 w-100 h-100 bg-danger bg-opacity-25 d-flex align-items-center justify-content-center transition hover-darken rounded-4">
+              <span class="text-white fw-semibold fs-5">{{ city.name }}</span>
+            </div>
+          </div>
+        </a>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- Featured Hotels -->
+<section class="py-5">
+  <div class="container">
+    <h2 class="h3 fw-bold mb-4 text-danger text-center">🏨 Featured Hotels</h2>
+    <div class="row g-4">
+      {% for hotel in featured_hotels %}
+      <div class="col-md-4">
+        <div class="card h-100 shadow-sm border-0 hover-lift transition rounded-4">
+          <img src="{{ hotel.image_url }}" class="card-img-top rounded-top-4 transition hover-scale"
+               style="height: 220px; object-fit: cover;">
+          <div class="card-body">
+            <h5 class="card-title text-dark">{{ hotel.name }}</h5>
+            <p class="card-text text-muted">{{ hotel.location }}</p>
+            <p class="text-danger fw-bold fs-5">₹ {{ hotel.price }} / night</p>
+            <a href="/hotel/{{ hotel.id }}" class="btn btn-danger w-100 fw-semibold hover-scale rounded-3 shadow-sm">
+              View Details ➝
+            </a>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials Section -->
+<section class="py-5 bg-light">
+  <div class="container">
+    <h2 class="h3 fw-bold mb-5 text-danger text-center">💬 What Our Guests Say</h2>
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="testimonial-card bg-white p-4 rounded-4 shadow-sm hover-lift transition h-100">
+          <div class="stars text-danger mb-3">★★★★★</div>
+          <p class="text-muted">"Amazing service and beautiful hotels. Perfect Stay made our vacation unforgettable!"</p>
+          <div class="d-flex align-items-center mt-3">
+            <div class="avatar bg-danger text-white rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 40px; height: 40px;">
+              <span class="fw-bold">S</span>
+            </div>
+            <div>
+              <h6 class="mb-0 text-dark">Pratik Survase</h6>
+              <small class="text-muted">Verified Guest</small>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="testimonial-card bg-white p-4 rounded-4 shadow-sm hover-lift transition h-100">
+          <div class="stars text-danger mb-3">★★★★★</div>
+          <p class="text-muted">"Best prices guaranteed! Found incredible deals on luxury hotels worldwide."</p>
+          <div class="d-flex align-items-center mt-3">
+            <div class="avatar bg-danger text-white rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 40px; height: 40px;">
+              <span class="fw-bold">M</span>
+            </div>
+            <div>
+              <h6 class="mb-0 text-dark">Raj Lokare</h6>
+              <small class="text-muted">Business Traveler</small>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="testimonial-card bg-white p-4 rounded-4 shadow-sm hover-lift transition h-100">
+          <div class="stars text-danger mb-3">★★★★★</div>
+          <p class="text-muted">"Seamless booking experience with excellent customer support. Highly recommended!"</p>
+          <div class="d-flex align-items-center mt-3">
+            <div class="avatar bg-danger text-white rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 40px; height: 40px;">
+              <span class="fw-bold">E</span>
+            </div>
+            <div>
+              <h6 class="mb-0 text-dark">Raj </h6>
+              <small class="text-muted">Family Traveler</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Newsletter Section -->
+<section class="py-5 bg-light text-center">
+  <div class="container">
+    <h2 class="h3 fw-bold mb-3 text-danger">📧 Stay Updated</h2>
+    <p class="lead mb-4 text-muted">Get exclusive deals and travel tips delivered to your inbox</p>
+    <form class="row g-3 justify-content-center" style="max-width: 500px; margin: 0 auto;">
+      <div class="col-8">
+        <input type="email" class="form-control form-control-lg border-danger shadow-sm" placeholder="Enter your email">
+      </div>
+      <div class="col-4">
+        <button type="submit" class="btn btn-danger btn-lg fw-semibold w-100 hover-scale shadow-sm">
+          Subscribe
+        </button>
+      </div>
+    </form>
+  </div>
+</section>
+
+<!-- Stats Section -->
+<section class="py-5">
+  <div class="container">
+    <div class="row text-center">
+      <div class="col-6 col-md-3 mb-4">
+        <div class="stat-card p-4">
+          <h3 class="display-6 fw-bold text-danger mb-2">50K+</h3>
+          <p class="text-muted">Happy Guests</p>
+        </div>
+      </div>
+      <div class="col-6 col-md-3 mb-4">
+        <div class="stat-card p-4">
+          <h3 class="display-6 fw-bold text-danger mb-2">1000+</h3>
+          <p class="text-muted">Hotels Worldwide</p>
+        </div>
+      </div>
+      <div class="col-6 col-md-3 mb-4">
+        <div class="stat-card p-4">
+          <h3 class="display-6 fw-bold text-danger mb-2">200+</h3>
+          <p class="text-muted">Cities Covered</p>
+        </div>
+      </div>
+      <div class="col-6 col-md-3 mb-4">
+        <div class="stat-card p-4">
+          <h3 class="display-6 fw-bold text-danger mb-2">24/7</h3>
+          <p class="text-muted">Customer Support</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Custom Styles -->
+<style>
+  .transition { transition: all 0.3s ease-in-out; }
+  .hover-scale:hover { transform: scale(1.05); }
+  .hover-lift:hover { transform: translateY(-6px); box-shadow: 0 12px 25px rgba(220, 53, 69, 0.2); }
+  .hover-darken:hover { background-color: rgba(220, 53, 69, 0.6) !important; }
+
+  /* Hero section */
+  .hero-section {
+    background: linear-gradient(135deg, #e85c68 0%, #dc3545 50%, #c82333 100%);
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-section::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="white" opacity="0.1"/><circle cx="75" cy="75" r="1" fill="white" opacity="0.1"/><circle cx="50" cy="10" r="1" fill="white" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+    opacity: 0.2;
+  }
+
+  /* Feature cards */
+  .feature-card {
+    background: #fff;
+    border: 1px solid rgba(220, 53, 69, 0.1);
+  }
+
+  /* Testimonial cards */
+  .testimonial-card { border-left: 4px solid #dc3545; }
+  .stars { font-size: 1.2rem; letter-spacing: 2px; }
+
+  /* Stats section */
+  .stat-card { position: relative; }
+  .stat-card::after {
+    content: '';
+    position: absolute; bottom: 0; left: 50%;
+    transform: translateX(-50%);
+    width: 50px; height: 3px;
+    background: linear-gradient(90deg, #dc3545, #c82333);
+    border-radius: 2px;
+  }
+
+  /* Animations */
+  .animate-fade { opacity: 0; transform: translateY(20px); animation: fadeInUp 0.8s forwards; }
+  .delay-1 { animation-delay: 0.3s; }
+  .delay-2 { animation-delay: 0.6s; }
+  @keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
+
+  /* Forms */
+  .form-control:focus {
+    border-color: #dc3545;
+    box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
+  }
+
+  /* Buttons */
+  .btn-danger {
+    background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+    border: none;
+    box-shadow: 0 4px 15px rgba(220, 53, 69, 0.3);
+  }
+  .btn-danger:hover {
+    background: linear-gradient(135deg, #c82333 0%, #bd2130 100%);
+    box-shadow: 0 6px 20px rgba(220, 53, 69, 0.4);
+  }
+</style>
+
+{% endblock %}

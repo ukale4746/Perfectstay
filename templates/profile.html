@@ -1,0 +1,167 @@
+{% extends "base.html" %}
+{% block title %}Profile - Perfect Stay{% endblock %}
+
+{% block content %}
+<section class="py-5" style="background: #f8f9fa;">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+
+        <!-- Profile Header -->
+        <div class="card shadow-sm rounded-4 mb-4">
+          <div class="card-header bg-danger text-white text-center py-4 rounded-top-4">
+            <div class="profile-avatar mx-auto mb-3">
+              <i class="fas fa-user"></i>
+            </div>
+            <h2 class="h4 fw-bold mb-1">{{ user.username }}</h2>
+            <p class="mb-0 opacity-75">
+              <i class="fas fa-calendar-alt me-1"></i>
+              Member since {{ user.created_at.strftime('%B %Y') if user.created_at else '2025' }}
+            </p>
+          </div>
+          <div class="card-body p-4">
+
+            <!-- Stats -->
+            <div class="row text-center mb-4">
+              <div class="col-4">
+                <div class="stat-card">
+                  <div class="stat-number">12</div>
+                  <div class="stat-label">Bookings</div>
+                </div>
+              </div>
+              <div class="col-4">
+                <div class="stat-card">
+                  <div class="stat-number">4.8</div>
+                  <div class="stat-label">Rating</div>
+                </div>
+              </div>
+              <div class="col-4">
+                <div class="stat-card">
+                  <div class="stat-number">3</div>
+                  <div class="stat-label">Reviews</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Profile Details -->
+            <div class="mb-4">
+              <div class="detail-item mb-3">
+                <div class="detail-icon">
+                  <i class="fas fa-envelope"></i>
+                </div>
+                <div class="detail-content">
+                  <label class="detail-label">Email Address</label>
+                  <div class="detail-value">{{ user.email }}</div>
+                </div>
+              </div>
+
+              <div class="detail-item">
+                <div class="detail-icon">
+                  <i class="fas fa-phone"></i>
+                </div>
+                <div class="detail-content">
+                  <label class="detail-label">Phone Number</label>
+                  <div class="detail-value">{{ user.phone }}</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="d-flex gap-3 justify-content-center">
+              <button class="btn btn-danger px-4 rounded-pill">
+                <i class="fas fa-edit me-2"></i>Edit Profile
+              </button>
+              <a href="{{ url_for('logout') }}" class="btn btn-outline-danger px-4 rounded-pill">
+                <i class="fas fa-sign-out-alt me-2"></i>Logout
+              </a>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Recent Activity -->
+       
+
+<style>
+  /* General */
+  .profile-avatar {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.2);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .stat-card {
+    background: #fff;
+    padding: 0.75rem;
+    border-radius: 12px;
+    border: 1px solid #e9ecef;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .stat-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+  }
+
+  .stat-number { font-weight: 700; color: #dc3545; font-size: 1.25rem; }
+  .stat-label { font-size: 0.85rem; color: #6c757d; }
+
+  .detail-item {
+    display: flex;
+    align-items: center;
+    padding: 0.75rem 1rem;
+    background: #fff;
+    border-radius: 12px;
+    border: 1px solid #e9ecef;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .detail-item:hover {
+    transform: translateX(4px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.05);
+    border-color: #dc3545;
+  }
+
+  .detail-icon {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: #dc3545;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    margin-right: 1rem;
+    font-size: 1rem;
+  }
+
+  .detail-label { font-size: 0.85rem; color: #6c757d; margin-bottom: 0.2rem; font-weight: 500; }
+  .detail-value { font-weight: 600; color: #212529; font-size: 1rem; }
+
+  .activity-item { display: flex; align-items: flex-start; margin-bottom: 1rem; }
+  .activity-icon {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 1rem;
+    font-size: 0.85rem;
+  }
+  .activity-title { font-weight: 600; font-size: 0.95rem; color: #212529; margin-bottom: 0.2rem; }
+  .activity-desc { font-size: 0.85rem; color: #6c757d; margin-bottom: 0.2rem; }
+  .activity-time { font-size: 0.75rem; color: #adb5bd; }
+
+  .btn { font-weight: 500; transition: all 0.3s ease; }
+  .btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.1); }
+</style>
+{% endblock %}
